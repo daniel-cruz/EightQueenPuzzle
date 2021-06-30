@@ -1,0 +1,30 @@
+version: '3.7'
+
+volumes:
+    postgres:
+
+services:
+  postgres:
+    container_name: eightqueens_db
+    image: "postgres"
+    environment:
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "Cuenca2021"
+      PGDATA: "/data/postgres"
+    volumes:
+       - postgres:/data/postgres
+       - ./init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+    ports:
+      - "5432:5432"
+  eightqueens:
+    build: .
+    ports:
+        - "5000:2605"
+    volumes:
+        - .:/eightqueens
+    links:
+        - postgres
+    depends_on:
+        - postgres
+    env_file:
+        - .env
