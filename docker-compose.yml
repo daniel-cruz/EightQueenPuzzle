@@ -19,7 +19,7 @@ services:
   eightqueens:
     build: .
     ports:
-        - "5000:2605"
+        - "5000:5000"
     volumes:
         - .:/eightqueens
     links:

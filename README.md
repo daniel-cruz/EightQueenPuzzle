@@ -8,4 +8,6 @@ In order to do the unit test, just type pytest on root directory. The solution's
 
 The code is based on Backtraking algorith https://youtu.be/0DeznFqrgAI and https://github.com/sol-prog/N-Queens-Puzzle code
 
+You can access to web interface on localhost:5000
+
 Please let me know if you have any doubt or comment.
