@@ -5,39 +5,26 @@ class Queens:
     def __init__(self, N):
         self.size = N
         self.board = [-1] * self.size
-        self.solutions = 0
+        self.nSolutions = 0
+        self.solutions = []
         self.solve(0)
 
-    def solve(self, row):
-        if row < self.size:
+    def solve(self, n):
+        if n < self.size:
             for column in range(self.size):
-                if self.verify(row, column):
-                    self.board[row] = column
-                    self.solve(row + 1)
+                if self.verify(n, column):
+                    self.board[n] = column
+                    self.solve(n + 1)
         else:
-            self.solutions += 1
+            self.nSolutions += 1
+            self.solutions.append(self.board)
 
-    def verify(self, row, column):
-        for cell in range(row):
+    def verify(self, rows, column):
+        for row in range(rows):
             if (
-                self.board[cell] == column
-                or self.board[cell] - cell == column - row
-                or self.board[cell] + cell == column + row
+                self.board[row] == column
+                or ((self.board[row] - row) == (column - rows))
+                or ((self.board[row] + row) == (column + rows))
             ):
                 return False
         return True
-
-    def display(self):
-        htmlString = "<div class='col-xs-1 col-sm-4'><table class='board'>"
-        for row in range(self.size):
-            htmlString += "<tr>"
-            for col in range(self.size):
-                htmlString += "<td>"
-                if self.board[row] == col:
-                    htmlString += "Q"
-                else:
-                    htmlString += " "
-                htmlString += "</td>"
-            htmlString += "</tr>"
-        htmlString += "</table></div>"
-        return htmlString
